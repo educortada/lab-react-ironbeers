@@ -4,12 +4,12 @@ import beersService from '../services/beers'
 //  Components
 import Card from '../components/Card'
 
-
 class BeersList extends Component {
 
   state = {
     beers: [],
     status: 'isLoading',
+    searchWord: '',
   }
 
   componentDidMount = async () => {
@@ -19,7 +19,7 @@ class BeersList extends Component {
         beers: data,
         status: 'isLoaded',
       })
-      
+
     } catch (error) {
       this.setState({
         status: 'hasError',
@@ -36,6 +36,38 @@ class BeersList extends Component {
     )
   }
 
+  handleInput = async (event) => {
+    await this.setState({
+      searchWord: event.target.value,
+      status: 'isLoading',
+    })
+
+    try {
+      // Prevent error when searchWord is empty
+      if (this.state.searchWord.length > 0) {
+        const data = await beersService.searchBeers(this.state.searchWord)
+        console.log(data);
+        this.setState({
+          beers: data,
+          status: 'isLoaded',
+        })
+        // When searchWord is empty show all beers
+      } else {
+        const data = await beersService.getAll()
+        this.setState({
+          beers: data,
+          status: 'isLoaded',
+        })
+      }
+
+    } catch (error) {
+      this.setState({
+        status: 'hasError',
+      })
+      console.log(error)
+    }
+  }
+
   render() {
     const { status } = this.state;
 
@@ -50,11 +82,25 @@ class BeersList extends Component {
         )
       case 'isLoaded':
         return (
-          <section className="section">
-            <div className="container">
-              {this.renderList()}
-            </div>
-          </section>
+          <React.Fragment>
+            <section className="section">
+              <div className="container">
+                <input
+                  onChange={this.handleInput}
+                  className="input is-rounded"
+                  name="serachWord"
+                  type="text"
+                  placeholder="Search beer..."
+                  value={this.state.searchWord}
+                ></input>
+              </div>
+            </section>
+            <section className="section">
+              <div className="container">
+                {this.renderList()}
+              </div>
+            </section>
+          </React.Fragment>
         )
       case 'hasError':
         return 'Error!'

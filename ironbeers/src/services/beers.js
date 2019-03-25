@@ -21,6 +21,10 @@ class BeersService {
     return this.api.get('/random')
       .then(({ data }) => data)
   }
+  searchBeers(query){
+    return this.api.get(`/search?q=${query}`)
+    .then(({ data }) => data)
+  }
 }
 
 const beersService = new BeersService();

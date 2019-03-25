@@ -31,7 +31,6 @@ export class Detail extends Component {
           </div>
         </article>
       </div>
-
     )
   }
 }
