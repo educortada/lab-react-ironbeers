@@ -6,6 +6,18 @@ html {
   box-sizing: inherit;
 }
 
+.section{
+  padding: 4rem 1.5rem;
+}
+
 .navbar{
   align-items: center;
+}
+
+.is-loading{
+  position: relative;
+}
+
+.image.is-2by3 img{
+  width: auto;
 }

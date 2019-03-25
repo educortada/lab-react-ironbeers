@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import beersService from './services/beers'
 
 // CSS
 import 'bulma/css/bulma.css'
@@ -27,7 +26,7 @@ class App extends Component {
         <Navbar />
         <Route exact path='/' component={Home} />
         <Route path='/beers' component={BeersList} />
-        <Route path='/beer/:idb' component={BeerDetail} />
+        <Route path='/beer/:id' component={BeerDetail} />
         <Route path='/random-beer' component={RandomBeer} />
         <Route path='/new-beer' component={NewBeer} />
       </React.Fragment>
