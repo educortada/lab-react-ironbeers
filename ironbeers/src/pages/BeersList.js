@@ -19,7 +19,7 @@ class BeersList extends Component {
         beers: data,
         status: 'isLoaded',
       })
-      console.log(data);
+      
     } catch (error) {
       this.setState({
         status: 'hasError',
@@ -38,7 +38,6 @@ class BeersList extends Component {
 
   render() {
     const { status } = this.state;
-    console.log(status);
 
     switch (status) {
       case 'isLoading':

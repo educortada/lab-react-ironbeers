@@ -17,7 +17,3 @@ html {
 .is-loading{
   position: relative;
 }
-
-.image.is-2by3 img{
-  width: auto;
-}
